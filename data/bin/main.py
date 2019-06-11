@@ -14,40 +14,46 @@ from pygame.locals import *
 
 from const import *
 from window import *
+from home import *
+from level import *
 
 window = Window(title, icon, length_window, height_window)
-window = window.generate()
+screen = window.generate()
 
-purchase = 1
-purchase_home = 1
+home = Home()
+home.load(screen, home_lv1)
+lv = LV1
 
-home = pygame.image.load("../resources/menu/home.png").convert_alpha()
-window.blit(home, (0,0))
+while window.state():
 
-cursor = pygame.image.load("../resources/menu/cursor.png").convert()
-cursor.set_colorkey((0, 0, 0))
-window.blit(cursor, home_lv1)
-pygame.display.flip()
+    for event in pygame.event.get():
+        window.exit(event)
 
-while purchase:
-
-    while purchase_home:
+    while home.state():
         #limite boucle speed
         pygame.time.Clock().tick(30)
 
         for event in pygame.event.get():
             #exit soft
-            if event.type == QUIT:
-                purchase = 0
-                purchase_home = 0
+            if not(window.exit(event)):
+                home.exit()
 
+            #gestion menu
             if event.type == KEYDOWN:
-                window.blit(home, (0,0))
                 #select down
                 if event.key == K_s:
-                    window.blit(cursor, home_lv2)
+                    home.load(screen, home_lv2)
+                    lv = LV2
                 #select up
                 if event.key == K_w:
-                    window.blit(cursor, home_lv1)
+                    home.load(screen, home_lv1)
+                    lv = LV1
+                #select level
+                if event.key == K_RETURN:
+                    home.exit()
 
-        pygame.display.flip()
+    level = Level()
+    level.generate(lv)
+    level.display(screen)
+
+    pygame.display.flip()

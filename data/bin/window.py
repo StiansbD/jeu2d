@@ -8,6 +8,10 @@ class Window:
         self.icon = icon
         self.length = length
         self.height = height
+        self.purchase = 1
+
+    def state(self):
+        return self.purchase
 
     def generate(self):
         pygame.init()
@@ -16,3 +20,9 @@ class Window:
         #titre
         pygame.display.set_caption(self.title)
         return(window)
+
+    def exit(self, event):
+        #exit soft
+        if event.type == QUIT:
+            self.purchase = 0
+        return self.purchase
