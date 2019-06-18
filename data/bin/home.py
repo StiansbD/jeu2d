@@ -1,10 +1,14 @@
 import pygame
 from pygame.locals import *
+from const import *
 
 class Home:
     #gérer le menu principal
     def __init__(self):
         self.purchase = 1
+
+    def set(self, purchase):
+        self.purchase = purchase
 
     def exit(self):
         self.purchase = 0
@@ -22,3 +26,8 @@ class Home:
         cursor.set_colorkey((0, 0, 0))
         window.blit(cursor, level)
         pygame.display.flip()
+
+        if level == home_lv1:
+            return LV1
+        elif level == home_lv2:
+            return LV2

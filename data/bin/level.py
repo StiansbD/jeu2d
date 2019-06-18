@@ -10,6 +10,10 @@ class Level:
         self.level2 = path + "__level2__.txt"
         self.struct = 0
 
+        #load img
+        self.wall = pygame.image.load(self.path + "wall.png").convert()
+        self.floor = pygame.image.load(self.path + "floor.png").convert()
+
     def generate(self, level):
         if level == LV1:
             file = self.level1
@@ -32,12 +36,10 @@ class Level:
                 level_struct.append(level_line)
             #save this struct
             self.struct = level_struct
+            file.close()
 
-    def display(self, window):
-        #load img
-        wall = pygame.image.load(self.path + "wall.png").convert()
-        floor = pygame.image.load(self.path + "floor.png").convert()
-
+    def display(self, window, position):
+        window.fill(black)
         #read level list
         line_nb = 0
         for line in self.struct:
@@ -45,11 +47,11 @@ class Level:
             case_nb = 0
             for sprite in line:
                 #find real position
-                x = case_nb * tile_format
-                y = line_nb * tile_format
-                if sprite == 'w':       #wall
-                    window.blit(wall, (x, y))
-                elif sprite == 'f':     #floor
-                    window.blit(floor, (x, y))
+                x = (case_nb - position[0]) * tile_format + perso_x
+                y = (line_nb - position[1]) * tile_format + perso_y
+                if sprite == 'w':                       #wall
+                    window.blit(self.wall, (x, y))
+                elif sprite == 'f' or sprite == 's':    #floor and start
+                    window.blit(self.floor, (x, y))
                 case_nb += 1
             line_nb += 1

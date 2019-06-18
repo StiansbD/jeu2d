@@ -25,4 +25,5 @@ class Window:
         #exit soft
         if event.type == QUIT:
             self.purchase = 0
+
         return self.purchase
