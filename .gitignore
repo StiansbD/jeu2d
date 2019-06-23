@@ -1,5 +1,6 @@
 
 notes.txt
 data/bin/__pycache__/
-compile.bat
 data/bin/test.py
+main.bat
+test.bat

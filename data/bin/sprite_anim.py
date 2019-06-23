@@ -37,3 +37,9 @@ class SpriteAnim():
         pygame.display.flip()
         self.image = self.strips[self.n].next()
         self.clock.tick(self.FPS)
+
+    def stop(self, surface):
+        surface.blit(self.image, center)
+        pygame.display.flip()
+        self.image = self.strips[self.n].next()
+        self.clock.tick(1)

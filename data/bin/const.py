@@ -41,3 +41,12 @@ perso_x = length_window/2
 perso_y = height_window/2
 
 start = (2, 2)
+
+#items
+apple = (0, 8)
+key = (4, 8)
+parchment = (6, 4)
+necklace = (0, 4)
+candle = (6, 8)
+hat = (5, 6)
+potion = (3, 5)

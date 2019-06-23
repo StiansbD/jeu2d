@@ -49,9 +49,17 @@ class Level:
                 #find real position
                 x = (case_nb - position[0]) * tile_format + perso_x
                 y = (line_nb - position[1]) * tile_format + perso_y
-                if sprite == 'w':                       #wall
+                if sprite == 'w' or sprite == 'p':                       #wall
                     window.blit(self.wall, (x, y))
                 elif sprite == 'f' or sprite == 's':    #floor and start
                     window.blit(self.floor, (x, y))
                 case_nb += 1
             line_nb += 1
+
+    def get(self, position):
+        #read level list
+        line_nb = 0
+        if self.struct[position[1]][position[0]] == 'w':
+            return 0
+        else:
+            return 1

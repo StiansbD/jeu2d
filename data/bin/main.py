@@ -66,26 +66,35 @@ while window.state():
                 game = 0
             if event.type == KEYDOWN:
                 if event.key == K_w:
-                    position = (position[0], position[1] - 1)
+                    new_position = (position[0], position[1] - 1)
+                    if level.get(new_position):
+                        position = new_position
                     if anim.get() != up:
                         anim.set(up)
                 if event.key == K_s:
-                    position = (position[0], position[1] + 1)
+                    new_position = (position[0], position[1] + 1)
+                    if level.get(new_position):
+                        position = new_position
                     if anim.get() != down:
                         anim.set(down)
                 if event.key == K_a:
-                    position = (position[0] - 1, position[1])
+                    new_position = (position[0] - 1, position[1])
+                    if level.get(new_position):
+                        position = new_position
                     if anim.get() != left:
                         anim.set(left)
                 if event.key == K_d:
-                    position = (position[0] + 1, position[1])
+                    new_position = (position[0] + 1, position[1])
+                    if level.get(new_position):
+                        position = new_position
                     if anim.get() != right:
                         anim.set(right)
                 if event.key == K_ESCAPE:
                     game = 0
                     home.set(1)
 
-        anim.play(screen)
+        #anim.play(screen)
         level.display(screen, position)
+        anim.play(screen)
 
     pygame.display.flip()
